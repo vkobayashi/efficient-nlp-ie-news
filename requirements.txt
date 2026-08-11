@@ -1,0 +1,6 @@
+streamlit==1.38.0
+openai>=1.40.0
+feedparser==6.0.11
+requests==2.32.3
+trafilatura==1.12.2
+json-repair==0.29.3

@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: efficient-nlp-ie-news-dutch-news
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # To enable the "Local model" (in-process CPU transformers) option,
+    # switch to a plan with enough RAM (>=2GB) and use:
+    #   buildCommand: pip install -r requirements.txt -r requirements-local.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      # Set at least one of these in the Render dashboard (Environment tab)
+      # so users don't have to paste an API key into the UI every time.
+      # Not needed at all if you'll only use the local-model option.
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: TOGETHER_API_KEY
+        sync: false

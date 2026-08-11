@@ -1,0 +1,11 @@
+# Optional, heavy dependencies -- only needed if you want the "Local model"
+# option (running a small open-weight model in-process on CPU) to work.
+# Install alongside requirements.txt:
+#   pip install -r requirements.txt -r requirements-local.txt
+#
+# Not included in requirements.txt / the default Render build by default
+# because torch adds several hundred MB to the build and slug size, which
+# can be slow or fail outright on Render's free tier.
+torch==2.4.1
+transformers==4.44.2
+accelerate==0.34.2
