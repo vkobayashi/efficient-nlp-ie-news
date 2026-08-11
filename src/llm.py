@@ -1,7 +1,7 @@
 """
 Small-scale LLM engine wrappers.
 
-Adapted from OpenSPG/OneKE's ``src/models/llm_def.py``. OneKE ships two
+Ships two
 kinds of engine there: OpenAI-compatible API clients (``ChatGPT``,
 ``DeepSeek``, ``LocalServer``) and local ``transformers``-based engines
 (``LLaMA``, ``Qwen``, ``MiniCPM``, ``ChatGLM``, the fine-tuned ``OneKE``
@@ -42,7 +42,7 @@ class ProviderPreset:
 # Curated list of OpenAI-compatible providers that serve genuinely
 # small-scale models (a handful of billion parameters) rather than
 # frontier-scale ones. "custom" lets you point at any OpenAI-compatible
-# endpoint, e.g. a self-hosted vLLM/Ollama server -- mirroring OneKE's own
+# endpoint, e.g. a self-hosted vLLM/Ollama server 
 # ``LocalServer`` engine.
 PROVIDER_PRESETS: dict[str, ProviderPreset] = {
     "groq": ProviderPreset(
@@ -73,7 +73,7 @@ PROVIDER_PRESETS: dict[str, ProviderPreset] = {
         key="together",
         label="Together AI — Llama 3.1 8B Instruct Turbo (hosted)",
         base_url="https://api.together.xyz/v1",
-        default_model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        default_model="Qwen/Qwen2.5-7B-Instruct-Turbo",
         api_key_env="TOGETHER_API_KEY",
         notes="Another small open-weight option.",
     ),
@@ -98,8 +98,7 @@ LOCAL_MODEL_PRESETS: dict[str, str] = {
 
 
 class ApiLLMEngine:
-    """OpenAI-compatible chat engine, matching OneKE's BaseEngine contract
-    (``get_chat_response``) so the rest of the extraction pipeline is a
+    """OpenAI-compatible chat engine, so the rest of the extraction pipeline is a
     drop-in port of OneKE's ``ExtractionAgent`` / ``SchemaAgent`` logic."""
 
     kind = "api"
@@ -142,7 +141,7 @@ class LocalHFEngine:
 
     ``torch``/``transformers`` are only imported here, lazily, so a
     deployment that never selects "Local model" doesn't need those (large)
-    packages installed at all -- see requirements-local.txt.
+    packages installed at all .
     """
 
     kind = "local"

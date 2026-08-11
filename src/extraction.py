@@ -1,16 +1,11 @@
 """
-Extraction pipeline, ported from OpenSPG/OneKE's "quick mode":
+Extraction pipeline:
 
     schema_agent.get_retrieved_schema -> extraction_agent.extract_information_direct
                                        -> extraction_agent.summarize_answer
 
-(see ``src/pipeline.py`` and ``src/modules/extraction_agent.py`` in OneKE).
 
-This module keeps OneKE's chunk -> per-chunk extract -> summarize structure
-and its JSON-recovery regex (``utils/process.py:extract_json_dict``), but
-replaces the nltk sentence tokenizer with a small regex splitter so the app
-has no nltk-data download step, and always talks to an OpenAI-compatible
-small LLM (``src/llm.py``) instead of a local torch model.
+
 """
 
 from __future__ import annotations
@@ -41,7 +36,7 @@ def sent_tokenize(text: str) -> list[str]:
 
 
 def chunk_str(text: str, token_limit: int = CHUNK_TOKEN_LIMIT) -> list[str]:
-    """Ported from OneKE's utils/process.py:chunk_str."""
+    
     sentences = sent_tokenize(text)
     chunks: list[str] = []
     current_chunk: list[str] = []
@@ -75,14 +70,14 @@ def _remove_empty_values(obj):
 
 
 def extract_json_dict(text):
-    """Ported from OneKE's utils/process.py:extract_json_dict -- recovers the
+    """ recovers the
     last well-formed JSON object out of an LLM's free-form response.
 
     Extended with a ``json_repair`` fallback: small LLMs frequently emit
     entity names with embedded, unescaped quotes (e.g. nicknames like
-    ``"Shurandy "Tyson" Q."``), which breaks strict ``json.loads``. OneKE's
-    original version just returned the broken string in that case; here we
-    try to repair it, and only fall back to a plain-text result (never a
+    ``"Shurandy "Tyson" Q."``), which breaks strict ``json.loads``. 
+    original version just returned the broken string in that case; here we 
+     repair it, and only fall back to a plain-text result (never a
     dangling JSON-looking string) if repair also fails -- passing a
     not-quite-JSON string to the frontend is what caused the "Json Parse
     Error" the UI used to show.
@@ -111,8 +106,7 @@ def extract_json_dict(text):
 
 class ChatEngine(Protocol):
     """Structural type: anything with get_chat_response() works here --
-    covers both ApiLLMEngine and LocalHFEngine from src/llm.py without
-    hard-importing either concrete class name."""
+    covers both ApiLLMEngine and LocalHFEngine from src/llm.py """
 
     model: str
 
@@ -130,8 +124,7 @@ class ExtractionResult:
 
 
 def run_extraction(llm: ChatEngine, task: str, text: str) -> ExtractionResult:
-    """Faithful port of ExtractionAgent.extract_information_direct +
-    ExtractionAgent.summarize_answer for a single task on a single document."""
+    """ single task on a single document."""
     label = TASK_LABELS[task]
     try:
         chunks = chunk_str(text)

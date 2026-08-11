@@ -1,21 +1,18 @@
 """
-Prompt templates and default schemas, ported from OpenSPG/OneKE:
+Prompt templates and default schemas:
 
 - ``src/models/prompt_template.py``  (EXTRACT_INSTRUCTION, SUMMARIZE_INSTRUCTION)
 - ``src/modules/schema_agent.py``    (the NER / RE / EE / Triple default
   Pydantic-style schemas OneKE prints for its "quick" extraction mode)
 - ``src/config.yaml``                (the default per-task instructions)
 
-These are copied close to verbatim (langchain's ``PromptTemplate`` is
-swapped for plain ``str.format`` so the app doesn't need langchain as a
-dependency) so the extraction behaviour matches OneKE's own "quick mode"
-(``schema_agent.get_retrieved_schema`` + ``extraction_agent.extract_information_direct``).
+
 """
 
 from __future__ import annotations
 
 # ==================================================================== #
-#   Default per-task instructions  (OneKE src/config.yaml -> agent:)   #
+#   Default per-task instructions    #
 # ==================================================================== #
 
 DEFAULT_SCHEMA_NOTE = "The final extraction result should be formatted as a JSON object."
@@ -30,7 +27,7 @@ TASK_INSTRUCTIONS: dict[str, str] = {
     ),
 }
 
-# OneKE's ExtractionAgent.instruction_mapper (src/models/prompt_template.py)
+
 # -- a stricter, IE-specialist framing used alongside the schema above.
 TASK_ROLE_INSTRUCTIONS: dict[str, str] = {
     "NER": (
@@ -56,7 +53,7 @@ TASK_ROLE_INSTRUCTIONS: dict[str, str] = {
     ),
 }
 
-# OneKE's SchemaAgent.__preprocess_text default (printed) schemas for
+# schemas for
 # quick-mode NER / RE / EE / Triple tasks. Kept verbatim.
 TASK_SCHEMAS: dict[str, str] = {
     "NER": """
@@ -131,7 +128,7 @@ Now summarize the information from the Result List.
 
 
 def build_schema_block(task: str) -> str:
-    """OneKE's SchemaAgent.get_retrieved_schema: default note + printed class schema."""
+    """default note + printed class schema."""
     return f"{DEFAULT_SCHEMA_NOTE}\n{TASK_SCHEMAS[task]}"
 
 
