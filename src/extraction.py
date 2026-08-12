@@ -4,8 +4,6 @@ Extraction pipeline:
     schema_agent.get_retrieved_schema -> extraction_agent.extract_information_direct
                                        -> extraction_agent.summarize_answer
 
-
-
 """
 
 from __future__ import annotations
@@ -20,14 +18,13 @@ from typing import Protocol
 
 from .prompts import TASK_LABELS, build_extract_prompt, build_summarize_prompt
 
-CHUNK_TOKEN_LIMIT = 900  # OneKE default is 1024; slightly lower for small models' context.
+CHUNK_TOKEN_LIMIT = 900  # can be adjusted, slightly lower for small models' context.
 
 _SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9\u00C0-\u017F])")
 
 
 def sent_tokenize(text: str) -> list[str]:
-    """Lightweight stand-in for nltk's sent_tokenize (OneKE uses nltk;
-    dropped here to avoid an nltk-data download step on Render)."""
+    """Lightweight stand-in for nltk's sent_tokenize."""
     text = text.strip()
     if not text:
         return []

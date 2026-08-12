@@ -1,8 +1,6 @@
 """
 Fetches headlines from major Dutch news outlets (public RSS feeds) and the
-full article text for a selected story, for use as OneKE-style extraction
-input -- mirroring OneKE's own "web news knowledge extraction" example
-scenario (``examples/config`` in the OneKE repo).
+full article text for a selected story.
 """
 
 from __future__ import annotations

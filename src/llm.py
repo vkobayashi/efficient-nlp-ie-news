@@ -1,22 +1,19 @@
 """
 Small-scale LLM engine wrappers.
 
-Ships two
-kinds of engine there: OpenAI-compatible API clients (``ChatGPT``,
+Ships two kinds of engine there: OpenAI-compatible API clients (``ChatGPT``,
 ``DeepSeek``, ``LocalServer``) and local ``transformers``-based engines
-(``LLaMA``, ``Qwen``, ``MiniCPM``, ``ChatGLM``, the fine-tuned ``OneKE``
+(``LLaMA``, ``Qwen``, ``MiniCPM``, ``ChatGLM``, a fine-tuned 
 model itself). This module keeps both flavours, both exposing the same
-``get_chat_response(prompt) -> str`` contract OneKE's ``BaseEngine`` uses,
+``get_chat_response(prompt) -> str`` contract ``BaseEngine`` uses,
 so the rest of the extraction pipeline (``src/extraction.py``) doesn't care
 which one it's talking to:
 
 - ``ApiLLMEngine``   -- OpenAI-compatible hosted APIs (Groq/OpenAI/DeepSeek/
-                         Together/custom). No GPU needed, works on any
-                         Render plan. Mirrors OneKE's ``ChatGPT``/``DeepSeek``.
+                         Together/custom). No GPU needed.
 - ``LocalHFEngine``  -- runs a small open-weight model in-process on CPU
                          with ``transformers``, no external API or key
-                         needed. Mirrors OneKE's local ``Qwen``/``LLaMA``
-                         engines, just swapped to genuinely small (<=1.5B)
+                         needed. just swapped to genuinely small (<=1.5B)
                          checkpoints so plain-CPU inference is feasible.
 """
 
