@@ -59,7 +59,7 @@ PROVIDER_PRESETS: dict[str, ProviderPreset] = {
         base_url="https://api.deepseek.com",
         default_model="deepseek-chat",
         api_key_env="DEEPSEEK_API_KEY",
-        notes="Same provider OneKE ships a preset for.",
+        notes="Same provider ships a preset for.",
     ),
     "openai": ProviderPreset(
         key="openai",
@@ -67,11 +67,11 @@ PROVIDER_PRESETS: dict[str, ProviderPreset] = {
         base_url="https://api.openai.com/v1",
         default_model="gpt-4o-mini",
         api_key_env="OPENAI_API_KEY",
-        notes="OneKE's 'ChatGPT' engine preset.",
+        notes="'ChatGPT' engine preset.",
     ),
     "together": ProviderPreset(
         key="together",
-        label="Together AI — Llama 3.1 8B Instruct Turbo (hosted)",
+        label="Together AI — Qwen (hosted)",
         base_url="https://api.together.xyz/v1",
         default_model="Qwen/Qwen2.5-7B-Instruct-Turbo",
         api_key_env="TOGETHER_API_KEY",
@@ -83,7 +83,7 @@ PROVIDER_PRESETS: dict[str, ProviderPreset] = {
         base_url="http://localhost:8000/v1",
         default_model="your-model-name",
         api_key_env="CUSTOM_LLM_API_KEY",
-        notes="Mirrors OneKE's LocalServer engine for self-hosted servers reachable over HTTP.",
+        notes="LocalServer engine for self-hosted servers reachable over HTTP.",
     ),
 }
 
