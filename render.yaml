@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: efficient-nlp-ie-news-dutch-news
+    name: efficient-nlp-ie-dutch-news
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
