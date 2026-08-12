@@ -12,21 +12,6 @@ LLM**. The user picks which extraction task(s) to run:
 | **EE** | Events, their triggers, and arguments |
 | **Triple** | Open subject–relation–object triples |
 
-## Where OneKE comes in
-
-The extraction logic is a direct, lightweight port of
-[OpenSPG/OneKE](https://github.com/OpenSPG/OneKE)'s **"quick mode"**
-pipeline:
-
-| OneKE file | Ported to |
-|---|---|
-| `src/models/prompt_template.py` (`EXTRACT_INSTRUCTION`, `SUMMARIZE_INSTRUCTION`, `instruction_mapper`) | `src/prompts.py` |
-| `src/modules/schema_agent.py` (default NER/RE/EE/Triple Pydantic schemas) | `src/prompts.py` |
-| `src/modules/extraction_agent.py` (`extract_information_direct`, `summarize_answer`) | `src/extraction.py` |
-| `src/utils/process.py` (`chunk_str`, `extract_json_dict`) | `src/extraction.py` |
-| `src/models/llm_def.py` (`ChatGPT`/`DeepSeek`/`LocalServer` OpenAI-compatible engines) | `src/llm.py` (`ApiLLMEngine`) |
-| `src/models/llm_def.py` (`Qwen`/`LLaMA`/etc. local `transformers` engines) | `src/llm.py` (`LocalHFEngine`) |
-
 A knowledge-base case repository or its reflection
 agent can be created and they need a vector store , however it add a lot of moving parts for a demo
 app so not included in the demo for now, but both of  two engine *flavours* are here:
@@ -44,22 +29,9 @@ app so not included in the demo for now, but both of  two engine *flavours* are 
 
 It can be Picked between them from the sidebar at runtime in local deployment.
 
-## Project layout
-
-```
-app.py                 Streamlit UI
-src/
-  llm.py               ApiLLMEngine (hosted) + LocalHFEngine (in-process CPU) + provider presets
-  prompts.py            Ported OneKE prompt templates & NER/RE/EE/Triple schemas
-  extraction.py          Ported OneKE chunk -> extract -> summarize pipeline
-  news.py                 RSS headline fetching + full-article text extraction
-render.yaml              Render web service blueprint
-requirements.txt          Core deps (always installed)
-requirements-local.txt     Optional: torch + transformers, only for the "Local model" option
-```
 
 
-
+Access the app [here](https://efficient-nlp-ie-news-dutch-news.onrender.com/)
 ## Notes & limitations
 
 - RSS feed URLs occasionally change; `src/news.py` lists the current known
