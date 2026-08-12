@@ -13,7 +13,7 @@ from src.llm import LOCAL_MODEL_PRESETS, PROVIDER_PRESETS, create_llm_engine
 from src.news import NEWS_SOURCES, fetch_article_text, fetch_headlines
 from src.prompts import TASK_LABELS
 
-st.set_page_config(page_title="Dutch News IE with OneKE", page_icon="📰", layout="wide")
+st.set_page_config(page_title="News Information Extraction", page_icon="📰", layout="wide")
 
 st.title("📰 Dutch News → Information Extraction")
 st.caption(
