@@ -44,9 +44,9 @@ class ProviderPreset:
 PROVIDER_PRESETS: dict[str, ProviderPreset] = {
     "groq": ProviderPreset(
         key="groq",
-        label="Groq — Llama 3.3 70B versatile (hosted, small, fast, free tier)",
+        label="Groq — gpt oss 120b (hosted, small, fast, free tier)",
         base_url="https://api.groq.com/openai/v1",
-        default_model="llama-3.3-70b-versatile",
+        default_model="openai/gpt-oss-120b",
         api_key_env="GROQ_API_KEY",
         notes="Recommended default: an 8B-parameter open-weight model.",
     ),
@@ -68,9 +68,9 @@ PROVIDER_PRESETS: dict[str, ProviderPreset] = {
     ),
     "together": ProviderPreset(
         key="together",
-        label="Together AI — Mistral 7B (hosted)",
+        label="Together AI — Llama 3.3 70B(hosted)",
         base_url="https://api.together.xyz/v1",
-        default_model="mistralai/Mistral-7B-Instruct-v0.3",
+        default_model="meta-llama/Llama-3.3-70B-Instruct-Turbo",
         api_key_env="TOGETHER_API_KEY",
         notes="Another small open-weight option.",
     ),
